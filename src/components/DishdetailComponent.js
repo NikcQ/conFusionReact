@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {Card, CardImg, CardImgOverlay, CardText, CardBody,CardTitle} from 'reactstrap';
 
 function RenderDish({ dish }) {
@@ -39,16 +39,15 @@ function RenderComments({ comments }) {
 }
 
 const DishDetail = (props) => {
-    console.log('called')
     if (props.dish != null)
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-md-5 m-1">
-                        <RenderDish dish={props.dish} />
+                        <RenderDish dish={props.dish}></RenderDish>
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.dish.comments} />
+                        <RenderComments comments={props.dish.comments}></RenderComments>
                     </div>
                 </div>
             </div>)

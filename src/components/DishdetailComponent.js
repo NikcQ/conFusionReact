@@ -1,4 +1,3 @@
- 
 import React,{Component} from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
@@ -6,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -18,6 +16,7 @@ class CommentForm extends Component {
             isModalOpen: false
         };
         this.toggleModal = this.toggleModal.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(values) {
@@ -57,17 +56,17 @@ class CommentForm extends Component {
                                 </Col>
                         </Row>
                         <Row className="form-group">
-                            <Label htmlFor="yourname" className="ml-3">Your Name</Label>
+                            <Label htmlFor="author" className="ml-3">Your Name</Label>
                                 <Col md={12}>
-                                    <Control.text model=".yourname" id="yourname"
-                                        name="yourname" placeholder="Your Name"
+                                    <Control.text model=".author" id="author"
+                                        name="author" placeholder="Your Name"
                                         className="form-control"
                                         validators={{
                                             required, minLength: minLength(3), maxLength: maxLength(15)
                                         }} />
                                     <Errors
                                         className="text-danger"
-                                        model=".yourname"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -143,26 +142,23 @@ function RenderComments({comments, addComment, dishId}) {
 }
 
 const DishDetail = (props) => {
-
     if (props.isLoading) {
-            return(
-                <div className="container">
-                    <div className="row">            
-                        <Loading />
-                    </div>
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
                 </div>
-            );
-        }
-        else if (props.errMess) {
-            return(
-                <div className="container">
-                    <div className="row">            
-                        <h4>{props.errMess}</h4>
-                    </div>
+            </div>
+        );
+    } else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
                 </div>
-            );
-        }
-        else if (props.dish != null) {
+            </div>
+        );
+    } else if (props.dish!=null) {
         return(
             <div className="container">
                 <div className="row">
@@ -178,10 +174,8 @@ const DishDetail = (props) => {
                 <div className="row">
                     <RenderDish dish={props.dish} />
                     <RenderComments comments={props.comments}
-                    addComment={props.addComment}
-                    dishId={props.dish.id}
-                    />
-
+                        addComment={props.addComment}
+                        dishId={props.dish.id} />
                 </div>
             </div>
         );

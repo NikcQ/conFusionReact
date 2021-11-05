@@ -105,18 +105,15 @@ class CommentForm extends Component {
 function RenderDish({ dish }) {
     if (dish != null) {
         return (
-            <FadeTransform in
-                transformProps={{
-                    exitTransform: 'scale(0.5) translateY(-50%)'
-                }}>
-                <Card className="col-12 col-md-6 m-1">
+            
+                <Card className="col-12 col-md-5 m-1">
                     <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                         <CardTitle><strong>{dish.name}</strong></CardTitle>
                         <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
-            </FadeTransform>
+            
         );
     } else {
         return (
@@ -128,7 +125,7 @@ function RenderDish({ dish }) {
 function RenderComments({ comments, postComment, dishId }) {
     if (comments != null) {
         return (
-            <div className="col-12 col-md-6 m-1">
+            <div className="col-12 col-md-5 m-1">
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
                     <Stagger in>

@@ -1,3 +1,5 @@
+import * as actionTypes from './ActionTypes';
+
 export const InitialFeedback = {
     firstname: '',
     lastname: '',
